@@ -1,23 +1,64 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { Container } from 'native-base'
 
-export default class App extends React.Component {
-  render() {
+import AddScreen from './components/AddScreen'
+import AppHeader from './components/AppHeader'
+import FancyFooter from './components/FancyFooter'
+import ListScreen from './components/ListScreen'
+import WelcomeScreen from './components/WelcomeScreen'
+import WhatScreen from './components/WhatScreen'
+
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      displayAddScreen: true,
+      displayListScreen: false,
+      displayWelcomeScreen: false,
+      displayWhatScreen: false
+    }
+  }
+  onAdd = () => {
+    this.setState({
+      displayWelcomeScreen: this.state.displayAddScreen,
+      displayAddScreen: !this.state.displayAddScreen,
+      displayListScreen: false,
+      displayWhatScreen: false
+    })
+  }
+  onList = () => {
+    this.setState({
+      displayWelcomeScreen: this.state.displayListScreen,
+      displayListScreen: !this.state.displayListScreen,
+      displayAddScreen: false,
+      displayWhatScreen: false
+    })
+  }
+  onWhat = () => {
+    this.setState({
+      displayWelcomeScreen: this.state.displayWhatScreen,
+      displayWhatScreen: !this.state.displayWhatScreen,
+      displayAddScren: false,
+      displayListScreen: false
+    })
+  }
+  render () {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+      <Container style={styles.container}>
+        <AppHeader />
+        {this.state.displayWelcomeScreen && <WelcomeScreen />}
+        {this.state.displayAddScreen && <AddScreen />}
+        {this.state.displayListScreen && <ListScreen />}
+        {this.state.displayWhatScreen && <WhatScreen />}
+        <FancyFooter />
+      </Container>
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+})
+
+export default App
