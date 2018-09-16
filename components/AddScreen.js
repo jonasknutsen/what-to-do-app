@@ -16,6 +16,7 @@ class AddScreen extends React.Component {
       selected: value
     })
   }
+
   render () {
     return (
       <Content style={styles.container}>
