@@ -1,17 +1,17 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Content, Form, Icon, Item, Input, Picker, Text } from 'native-base'
+import { Body, Button, Card, CardItem, Content, Form, Icon, Item, Input, Picker, Text } from 'native-base'
 
 class AddScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       text: '',
-      selected: 'key2'
+      selected: 'task'
     }
   }
 
-  onValueChange = (value) => {
+  handlePickerChange = (value) => {
     this.setState({
       selected: value
     })
@@ -22,7 +22,7 @@ class AddScreen extends React.Component {
       <Content style={styles.container}>
         <Form>
           <Item regular>
-            <Input placeholder='What to do?' />
+            <Input placeholder='What to do?' name='text' value={this.state.text} onChangeText={(text) => this.setState({text})} />
           </Item>
           <Picker
             mode='dropdown'
@@ -30,16 +30,28 @@ class AddScreen extends React.Component {
             iosIcon={<Icon name='ios-arrow-down-outline' />}
             style={{ width: '100%' }}
             selectedValue={this.state.selected}
-            onValueChange={this.onValueChange}
+            onValueChange={this.handlePickerChange}
           >
-            <Picker.Item label='Movie' value='key0' />
-            <Picker.Item label='Book' value='key1' />
-            <Picker.Item label='Task' value='key2' />
+            <Picker.Item label='Movie' value='movie' />
+            <Picker.Item label='Book' value='book' />
+            <Picker.Item label='Task' value='task' />
           </Picker>
           <Button full style={styles.button}>
             <Text>Add something to do</Text>
           </Button>
         </Form>
+        <Card style={styles.card}>
+          <CardItem header>
+            <Text style={styles.cardHeader}>{this.state.selected}</Text>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>
+                {this.state.text}
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
       </Content>
     )
   }
@@ -51,6 +63,13 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#C73E1D'
+  },
+  card: {
+    marginTop: 20
+  },
+  cardHeader: {
+    textAlign: 'center',
+    fontSize: 24
   }
 })
 
