@@ -2,6 +2,8 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Container } from 'native-base'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { setContent } from '../redux/actions/index.actions'
 
 import AddScreen from '../components/AddScreen'
 import AppHeader from '../components/AppHeader'
@@ -11,51 +13,24 @@ import WelcomeScreen from '../components/WelcomeScreen'
 import WhatScreen from '../components/WhatScreen'
 
 class Main extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      displayAddScreen: false,
-      displayListScreen: false,
-      displayWelcomeScreen: true,
-      displayWhatScreen: false
-    }
-  }
-  onAdd = () => {
-    this.setState({
-      displayWelcomeScreen: this.state.displayAddScreen,
-      displayAddScreen: !this.state.displayAddScreen,
-      displayListScreen: false,
-      displayWhatScreen: false
-    })
-  }
-  onList = () => {
-    this.setState({
-      displayWelcomeScreen: this.state.displayListScreen,
-      displayListScreen: !this.state.displayListScreen,
-      displayAddScreen: false,
-      displayWhatScreen: false
-    })
-  }
-  onWhat = () => {
-    this.setState({
-      displayWelcomeScreen: this.state.displayWhatScreen,
-      displayWhatScreen: !this.state.displayWhatScreen,
-      displayAddScren: false,
-      displayListScreen: false
-    })
-  }
   render () {
+    const { setContent, activeScreen } = this.props
     return (
       <Container style={styles.container}>
         <AppHeader />
-        {this.state.displayWelcomeScreen && <WelcomeScreen />}
-        {this.state.displayAddScreen && <AddScreen />}
-        {this.state.displayListScreen && <ListScreen />}
-        {this.state.displayWhatScreen && <WhatScreen />}
-        <FancyFooter />
+        {activeScreen === 'welcome' && <WelcomeScreen />}
+        {activeScreen === 'add' && <AddScreen />}
+        {activeScreen === 'list' && <ListScreen />}
+        {activeScreen === 'what' && <WhatScreen />}
+        <FancyFooter setContent={setContent} />
       </Container>
     )
   }
+}
+
+Main.propTypes = {
+  activeScreen: PropTypes.string,
+  setContent: PropTypes.func
 }
 
 const styles = StyleSheet.create({
@@ -63,11 +38,11 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  state
+  activeScreen: state.content.activeScreen
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatch
+  setContent: (activeWindow) => dispatch(setContent(activeWindow))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

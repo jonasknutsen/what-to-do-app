@@ -1,22 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 
 class FancyFooter extends React.Component {
   render () {
+    const { setContent } = this.props
     return (
       <View style={styles.footer}>
-        <TouchableHighlight style={styles.whatContainer} onPress={this.onWhat} underlayColor={'#5C80BC'}>
+        <TouchableHighlight style={styles.whatContainer} onPress={() => setContent('what')} underlayColor={'#5C80BC'}>
           <Text style={styles.whatSymbol}>=</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.addContainer} onPress={this.onAdd} underlayColor={'#5C80BC'}>
+        <TouchableHighlight style={styles.addContainer} onPress={() => setContent('add')} underlayColor={'#5C80BC'}>
           <Text style={styles.addSymbol}>+</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.listContainer} onPress={this.onList} underlayColor={'#5C80BC'}>
+        <TouchableHighlight style={styles.listContainer} onPress={() => setContent('list')} underlayColor={'#5C80BC'}>
           <Text style={styles.listSymbol}>÷</Text>
         </TouchableHighlight>
       </View>
     )
   }
+}
+
+FancyFooter.propTypes = {
+  setContent: PropTypes.func
 }
 
 const styles = {
