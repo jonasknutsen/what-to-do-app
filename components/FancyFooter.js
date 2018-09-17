@@ -25,7 +25,7 @@ FancyFooter.propTypes = {
   setContent: PropTypes.func
 }
 
-const styles = {
+const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -78,6 +78,6 @@ const styles = {
     lineHeight: 72,
     color: '#fff'
   }
-}
+})
 
 export default FancyFooter
