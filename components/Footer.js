@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 
-class FancyFooter extends React.Component {
+class Footer extends React.Component {
   render () {
     const { setContent } = this.props
     return (
@@ -21,7 +21,7 @@ class FancyFooter extends React.Component {
   }
 }
 
-FancyFooter.propTypes = {
+Footer.propTypes = {
   setContent: PropTypes.func
 }
 
@@ -30,9 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#000',
     width: '100%',
-    paddingBottom: 15,
     height: 60
   },
   whatContainer: {
@@ -80,4 +78,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FancyFooter
+export default Footer

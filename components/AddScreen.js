@@ -17,6 +17,10 @@ class AddScreen extends React.Component {
     })
   }
 
+  handleSubmit = () => {
+    console.log('submit')
+  }
+
   render () {
     return (
       <Content style={styles.container}>
@@ -32,9 +36,9 @@ class AddScreen extends React.Component {
             selectedValue={this.state.selected}
             onValueChange={this.handlePickerChange}
           >
-            <Picker.Item label='Movie' value='movie' />
-            <Picker.Item label='Book' value='book' />
-            <Picker.Item label='Task' value='task' />
+            <Picker.Item label='Movie' value='Movie' />
+            <Picker.Item label='Book' value='Book' />
+            <Picker.Item label='Task' value='Task' />
           </Picker>
           <Button full style={styles.button}>
             <Text>Add something to do</Text>
@@ -49,7 +53,13 @@ class AddScreen extends React.Component {
               <Text>
                 {this.state.text}
               </Text>
+              {this.state.text === '' && <Text>
+                Nothing so far
+              </Text>}
             </Body>
+          </CardItem>
+          <CardItem footer>
+            <Text>This is what you are adding</Text>
           </CardItem>
         </Card>
       </Content>

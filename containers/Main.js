@@ -1,28 +1,29 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { setContent } from '../redux/actions/index.actions'
 
 import AddScreen from '../components/AddScreen'
-import AppHeader from '../components/AppHeader'
-import FancyFooter from '../components/FancyFooter'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import ListScreen from '../components/ListScreen'
 import WelcomeScreen from '../components/WelcomeScreen'
 import WhatScreen from '../components/WhatScreen'
+
+import Container from '../components/Container'
 
 class Main extends React.Component {
   render () {
     const { setContent, activeScreen } = this.props
     return (
       <Container style={styles.container}>
-        <AppHeader />
+        <Header />
         {activeScreen === 'welcome' && <WelcomeScreen />}
         {activeScreen === 'add' && <AddScreen />}
         {activeScreen === 'list' && <ListScreen />}
         {activeScreen === 'what' && <WhatScreen />}
-        <FancyFooter setContent={setContent} />
+        <Footer setContent={setContent} />
       </Container>
     )
   }
